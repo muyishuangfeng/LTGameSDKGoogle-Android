@@ -3,4 +3,4 @@
 
 
 
-         implementation 'com.github.muyishuangfeng:LTGameSDKGoogle-Android:1.0.1'
+         implementation 'com.github.muyishuangfeng:LTGameSDKGoogle-Android:1.0.2'
