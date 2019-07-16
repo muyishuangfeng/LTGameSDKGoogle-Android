@@ -9,7 +9,9 @@ import android.util.Log;
 
 import com.gentop.ltgame.ltgamenet.manager.LoginRealizeManager;
 import com.gentop.ltgame.ltgamesdkcore.common.Target;
+import com.gentop.ltgame.ltgamesdkcore.exception.LTGameError;
 import com.gentop.ltgame.ltgamesdkcore.impl.OnLoginStateListener;
+import com.gentop.ltgame.ltgamesdkcore.model.LoginResult;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -32,7 +34,7 @@ class GoogleLoginHelper {
     public int selfRequestCode;
     private String adID;
 
-    GoogleLoginHelper(Activity activity, String clientID,  String adID,
+    GoogleLoginHelper(Activity activity, String clientID, String adID,
                       int selfRequestCode, OnLoginStateListener listener) {
         this.mActivityRef = new WeakReference<>(activity);
         this.clientID = clientID;
@@ -72,8 +74,17 @@ class GoogleLoginHelper {
     private void handleSignInResult(@NonNull Task<GoogleSignInAccount> completedTask) {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-            String idToken = account.getIdToken();
-            LoginRealizeManager.googleLogin(mActivityRef.get(), idToken, mListener);
+            if (account != null) {
+                String idToken = account.getIdToken();
+                if (!TextUtils.isEmpty(idToken)) {
+                    LoginRealizeManager.googleLogin(mActivityRef.get(), idToken, mListener);
+                } else {
+                    mListener.onState(mActivityRef.get(), LoginResult.failOf(LTGameError.make("Google user token is empty")));
+                }
+            } else {
+                mListener.onState(mActivityRef.get(), LoginResult.failOf(LTGameError.make("Google account is empty")));
+            }
+
         } catch (ApiException e) {
             e.printStackTrace();
         }
