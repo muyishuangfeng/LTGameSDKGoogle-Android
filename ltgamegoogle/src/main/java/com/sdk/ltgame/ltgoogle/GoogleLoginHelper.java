@@ -1,4 +1,4 @@
-package com.gentop.ltgame.ltgamegoogle;
+package com.sdk.ltgame.ltgoogle;
 
 import android.app.Activity;
 import android.content.Context;
@@ -7,7 +7,6 @@ import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.gentop.ltgame.ltgamenet.manager.LoginRealizeManager;
 import com.gentop.ltgame.ltgamesdkcore.common.Target;
 import com.gentop.ltgame.ltgamesdkcore.exception.LTGameError;
 import com.gentop.ltgame.ltgamesdkcore.impl.OnLoginStateListener;
@@ -19,6 +18,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.sdk.ltgame.ltnet.manager.LoginRealizeManager;
 
 import java.lang.ref.WeakReference;
 

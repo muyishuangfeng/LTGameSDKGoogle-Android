@@ -1,4 +1,4 @@
-package com.gentop.ltgame.ltgamegoogle.model;
+package com.sdk.ltgame.ltgoogle.model;
 
 import com.gentop.ltgame.ltgamesdkcore.common.Target;
 import com.gentop.ltgame.ltgamesdkcore.model.token.AccessToken;
