@@ -94,7 +94,6 @@ class GoogleLoginHelper {
      * 退出登录
      */
     void loginOut(Context context, String clientID) {
-        Log.e(TAG, "退出登录");
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(clientID)
                 .requestEmail()
@@ -103,7 +102,7 @@ class GoogleLoginHelper {
         mGoogleSignInClient.signOut().addOnCompleteListener((Activity) context, new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                login();
+                mListener.onState(mActivityRef.get(), LoginResult.failOf(LTGameError.make("Google loginOut")));
             }
         });
     }
