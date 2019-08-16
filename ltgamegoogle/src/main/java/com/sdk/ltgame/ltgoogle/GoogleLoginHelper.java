@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.gentop.ltgame.ltgamesdkcore.common.Target;
 import com.gentop.ltgame.ltgamesdkcore.exception.LTGameError;
@@ -24,9 +23,6 @@ import java.lang.ref.WeakReference;
 
 
 class GoogleLoginHelper {
-
-    private static final String TAG = GoogleLoginHelper.class.getSimpleName();
-
     private int mLoginTarget;
     private WeakReference<Activity> mActivityRef;
     private OnLoginStateListener mListener;
@@ -102,7 +98,7 @@ class GoogleLoginHelper {
         mGoogleSignInClient.signOut().addOnCompleteListener((Activity) context, new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                mListener.onState(mActivityRef.get(), LoginResult.failOf(LTGameError.make("Google loginOut")));
+                mListener.onState(mActivityRef.get(), LoginResult.loginOut(LTGameError.make("Google loginOut")));
             }
         });
     }
