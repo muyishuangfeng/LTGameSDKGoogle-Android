@@ -99,6 +99,7 @@ class GoogleLoginHelper {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 mListener.onState(mActivityRef.get(), LoginResult.loginOut(LTGameError.make("Google loginOut")));
+                mActivityRef.get().finish();
             }
         });
     }
