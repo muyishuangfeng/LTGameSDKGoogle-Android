@@ -22,7 +22,7 @@ import com.sdk.ltgame.ltnet.manager.LoginRealizeManager;
 import java.lang.ref.WeakReference;
 
 
-class GoogleLoginHelper {
+public class GoogleLoginHelper {
     private int mLoginTarget;
     private WeakReference<Activity> mActivityRef;
     private OnLoginStateListener mListener;
@@ -102,6 +102,41 @@ class GoogleLoginHelper {
                 mActivityRef.get().finish();
             }
         });
+    }
+
+    /**
+     * 获取token
+     */
+    public void getToken(String clientID, int selfRequestCode, Activity activity) {
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(clientID)
+                .requestEmail()
+                .build();
+        GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(activity, gso);
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        activity.startActivityForResult(signInIntent, selfRequestCode);
+    }
+
+
+    /**
+     * 获取token
+     */
+    public String getGuestToken(int requestCode, Intent data, int selfRequestCode) {
+        String idToken = "";
+        if (requestCode == selfRequestCode) {
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            try {
+                GoogleSignInAccount account = task.getResult(ApiException.class);
+                if (account != null) {
+                    idToken = account.getIdToken();
+                    return idToken;
+                }
+            } catch (ApiException e) {
+                e.printStackTrace();
+                return idToken;
+            }
+        }
+        return idToken;
     }
 
 }
