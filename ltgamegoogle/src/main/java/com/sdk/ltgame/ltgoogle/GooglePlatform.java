@@ -38,8 +38,8 @@ public class GooglePlatform extends AbsPlatform {
             IPlatform platform = null;
             LTGameOptions options = LTGameSdk.options();
             if (!LTGameUtil.isAnyEmpty(options.getGoogleClientID(), options.getAdID(),
-                    options.getLtAppId(), options.getLtAppKey(),
-                    options.getPackageID(), options.getBaseUrl()) && options.getSelfRequestCode() != -1) {
+                    options.getLtAppId(), options.getLtAppKey(), options.getPackageID())
+                    && options.getSelfRequestCode() != -1) {
                 platform = new GooglePlatform(context,options.getISServerTest(), options.getLtAppId(),
                         options.getLtAppKey(), options.getGoogleClientID(), options.getAdID(),
                         options.getPackageID(), options.getSelfRequestCode(), target);
