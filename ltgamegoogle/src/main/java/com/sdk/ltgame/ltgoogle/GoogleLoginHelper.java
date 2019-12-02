@@ -107,7 +107,7 @@ public class GoogleLoginHelper {
     /**
      * 获取token
      */
-    public void getToken(String clientID, int selfRequestCode, Activity activity) {
+    public static void getToken(String clientID, int selfRequestCode, Activity activity) {
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(clientID)
                 .requestEmail()
@@ -121,7 +121,7 @@ public class GoogleLoginHelper {
     /**
      * 获取token
      */
-    public String getGuestToken(int requestCode, Intent data, int selfRequestCode) {
+    public static String getGuestToken(int requestCode, Intent data, int selfRequestCode) {
         String idToken = "";
         if (requestCode == selfRequestCode) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
