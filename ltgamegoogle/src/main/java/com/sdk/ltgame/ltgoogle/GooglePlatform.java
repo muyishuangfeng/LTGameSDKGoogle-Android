@@ -22,9 +22,9 @@ public class GooglePlatform extends AbsPlatform {
 
     private GoogleLoginHelper mGoogleHelper;
 
-    private GooglePlatform(Context context, String baseUrl, String appId, String appKey, String clientID,
+    private GooglePlatform(Context context,boolean isServerTest,  String appId, String appKey, String clientID,
                            String adID, String packageID, int selfRequestCode, int target) {
-        super(context, baseUrl, appId, appKey, clientID, adID, packageID, selfRequestCode, target);
+        super(context, isServerTest, appId, appKey, clientID, adID, packageID, selfRequestCode, target);
     }
 
     /**
@@ -40,7 +40,7 @@ public class GooglePlatform extends AbsPlatform {
             if (!LTGameUtil.isAnyEmpty(options.getGoogleClientID(), options.getAdID(),
                     options.getLtAppId(), options.getLtAppKey(),
                     options.getPackageID(), options.getBaseUrl()) && options.getSelfRequestCode() != -1) {
-                platform = new GooglePlatform(context, options.getBaseUrl(), options.getLtAppId(),
+                platform = new GooglePlatform(context,options.getISServerTest(), options.getLtAppId(),
                         options.getLtAppKey(), options.getGoogleClientID(), options.getAdID(),
                         options.getPackageID(), options.getSelfRequestCode(), target);
             }
